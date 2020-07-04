@@ -101,4 +101,45 @@
      - email, username, pw 입력 후 `Next` 클릭 => 설치 완료
      - 언어 및 아바타 선택 => 설정 완료
 
-     
+     <br>
+
+- Jira API
+
+  > API (Application Programming Interface)란? - 기능 사용할 수 있도록 만들어 놓은 일종의 함수와 같은 것. 
+  >
+  > Jira는 API를 통해 이슈를 관리할 수 있도록 하는 API를 제공한다.
+
+  - ISSUE 관련 API
+
+    ```
+    api/2/issue
+    
+    Create issue  POST /rest/api/2/issue
+    Create issues POST /rest/api/2/issue/bulk
+    Get issue 		GET /rest/api/2/issue/{issueIdOrKey}
+    Delete issue  DELETE /rest/api/2/issue/{issueIdOrKey}
+    Edit issue		PUT /rest/api/2/issue/{issueIdOrKey}
+    ```
+
+    - [참고] [Jira API Docs](https://docs.atlassian.com/software/jira/docs/api/REST/8.4.2/)
+
+    <br>
+
+  - Postman으로 issue GET 해보기
+
+    - Request 설정
+
+      `GET http://<AWS EC2 IP 주소>:8080/rest/api/2/issue/BLOG-1` => 'BLOG-1'은 이슈의 이름
+
+    - Auth 설정
+
+      - Type : Basic Auth => username, pw 입력
+
+    - Header 설정
+
+      - Content-Type : application/json
+
+    - Response 확인
+
+    
+
