@@ -174,3 +174,57 @@
       ```
 
     - Response 확인 및 web page에서 확인
+
+    <br>
+
+  - Postman으로 이슈 상태 확인하기
+
+    - Request 설정
+
+      `GET http://<AWS EC2 IP 주소>:8080/rest/api/2/issue/WF-1/transitions`
+
+    - Auth와 Header는 GET과 동일
+
+    - Response
+
+      각 상태의 id값을 확인할 수 있다.
+
+      ```json
+      {
+          "expand": "transitions",
+          "transitions": [
+              {
+                  "id": "121",
+                  "name": "Canceled",
+                  "to": {
+                      "self": "http://54.180.141.198:8080/rest/api/2/status/10004",
+                      "description": "",
+                      "iconUrl": "http://54.180.141.198:8080/images/icons/statuses/generic.png",
+                      "name": "Canceled",
+                      "id": "10004",
+                      "statusCategory": {
+                          "self": "http://54.180.141.198:8080/rest/api/2/statuscategory/2",
+                          "id": 2,
+                          "key": "new",
+                          "colorName": "blue-gray",
+                          "name": "할 일"
+                      }
+                  }
+              }
+          ]
+      }
+      ```
+
+<br>
+
+- Jira 관리자
+  - 관리자 페이지 (이슈)
+    - 이슈 유형 - 이슈를 관리한다 (새로운 이슈 타입 생성)
+    - 이슈 유형 계획 - 프로젝트에 어떤 이슈 타입을 넣을 수 있을지를 설정
+    - 업무 흐름 - 업무의 단계를 설정
+    - 업무 흐름 계획 - 이슈 유형과 업무 흐름을 매핑
+    - 화면 - 편집을 통해서 화면에 보여줄 필드 정보를 추가/수정
+    - 화면 계획 - 커스터마이즈한 화면을 특정 화면 계획과 연결
+    - 이슈 유형 화면 계획 - 이슈 유형과 화면 계획을 연결
+    - 사용자 정의 필드 추가 - 사용자가 원하는 형태의 필드를 구성
+
