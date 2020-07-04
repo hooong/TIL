@@ -141,5 +141,36 @@
 
     - Response 확인
 
-    
+  <br>
 
+  - Postman으로 issue Create 해보기
+
+    - Request 설정
+
+      `POST http://<AWS EC2 IP 주소>:8080/rest/api/2/issue`
+
+    - Auth와 Header는 GET과 동일
+
+    - Body 설정 (json)
+
+      ```json
+      {
+          "fields": {
+              "project": {
+                  "key": "BLOG"
+              },
+              "summary": "테스트",
+              "issuetype": {
+                  "id": "10002"
+              },
+              "assignee": {
+                  "name": "hooong"
+              },
+              "reporter": {
+                  "name": "hooong"
+              }
+          }
+      }
+      ```
+
+    - Response 확인 및 web page에서 확인
