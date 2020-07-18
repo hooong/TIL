@@ -27,6 +27,23 @@
 
   <br>
 
+- #### Shell Booting Sequence
+
+  - ```
+    /etc/profile => (공통수행)환경 설정들
+    /etc/profile.d/*.sh => (공통수행)
+    /etc/bash.bahsrc => (공통수행)시스템 alias 등
+    ~/.profile => (사용자별 디렉토리)시작 프로그램 등
+    ~/.bashrc => (사용자별 디렉토리) alias 등
+    ~/.bahs_aliases => (이 파일이 추가적으로 있다면 수행 - 기본적으로 없음)
+    ```
+
+  - BASH의 종료
+
+    - `~/.bash_logout` 의 실행
+
+    <br>
+
 - ####  Bash의 기본명령어
 
   - `$ echo [OPTION]... [STRING]...` : 화면에 글자를 출력
@@ -51,6 +68,10 @@
     > - 장치 번호 1 : stdout (표준 출력)
     > - 장치 번호 2 : stderr (에러 출력)
     > - 장치 번호 3 : stdin (표준 입력)
+
+  - 입력
+
+    - `<` : 오른쪽의 결과값을 왼쪽에 인자값으로 사용 가능
 
   - Delimiter 
 
@@ -137,17 +158,4 @@
 
 <br>
 
-- #### Shell Booting Sequence
-
-  - ```
-    /etc/profile => (공통수행)환경 설정들
-    /etc/profile.d/*.sh => (공통수행)
-    /etc/bash.bahsrc => (공통수행)시스템 alias 등
-    ~/.profile => (사용자별 디렉토리)시작 프로그램 등
-    ~/.bashrc => (사용자별 디렉토리) alias 등
-    ~/.bahs_aliases => (이 파일이 추가적으로 있다면 수행 - 기본적으로 없음)
-    ```
-
-  - BASH의 종료
-    - `~/.bash_logout` 의 실행
-
+- #### 
