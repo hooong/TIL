@@ -149,7 +149,7 @@
 
 ### nodemon
 
-> 
+> 파일의 변경이 감지될 때 자동으로 재시작을 해주는 툴
 
 - 설치하기
   - `$ sudo npm istall -g nodemon`
