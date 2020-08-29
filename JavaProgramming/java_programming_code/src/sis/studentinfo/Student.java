@@ -1,13 +1,13 @@
-package studentinfo;
+package sis.studentinfo;
 
 public class Student {
     private String name;
 
-    Student(String name){
+    public Student(String name){
         this.name = name;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 }
