@@ -78,5 +78,8 @@ public class Foo {
 
         // UnaryOperator<T> : 입력타입과 반환타입이 같은 Function의 특수 형태
         UnaryOperator<Integer> plus10_2 = (i) -> i+10;
+
+        // BinaryOperator<T> : 입력이 두 개, 반환 하나인 BiFunction이랑 같지만 모두 타입이 같은 특수 형태
+        BinaryOperator<Integer> sum = (a, b) -> a + b;
     }
 }
