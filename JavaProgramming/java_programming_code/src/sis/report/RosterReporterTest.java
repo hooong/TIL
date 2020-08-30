@@ -8,8 +8,8 @@ import sis.studentinfo.Student;
 public class RosterReporterTest extends TestCase {
     public void testRosterReport(){
         CourseSession session =
-                new CourseSession("ENGL", "101",
-                        new DateUtil().createDate(2003, 1, 6));
+                CourseSession.create("ENGL", "101",
+                        DateUtil.createDate(2003, 1, 6));
 
         session.enroll(new Student("A"));
         session.enroll(new Student("B"));
