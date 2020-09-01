@@ -7,6 +7,12 @@ import java.util.ArrayList;
 public class Board {
     private ArrayList<Pawn> pawnList = new ArrayList<>();
 
+    public Board() {
+        for (int i=0; i<8; i++) {
+            pawnList.add();
+        }
+    }
+
     public void addPiece() {
         pawnList.add(new Pawn());
     }

@@ -1,8 +1,8 @@
 package chess.pieces;
 
 public class Pawn {
-    final String COLOR_WHITE = "White";
-    final String COLOR_BLACK = "Black";
+    final String COLOR_WHITE = "p";
+    final String COLOR_BLACK = "P";
 
     private String color;
 
