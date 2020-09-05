@@ -1,17 +1,12 @@
 # 마구간 정하기
 
 def is_possible(distance):
-    count = c
-    before = 0
+    count = c-1
+    before = stables[0]
 
-    for i in range(len(stables)):
+    for i in range(1,len(stables)):
         if count == 0:
             return True
-
-        if i == 0:
-            before = stables[i]
-            count -= 1
-            continue
             
         if stables[i] - before >= distance:
             count -= 1
