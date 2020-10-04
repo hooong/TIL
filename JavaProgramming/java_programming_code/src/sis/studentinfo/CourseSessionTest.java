@@ -4,55 +4,25 @@ import junit.framework.TestCase;
 
 import java.util.Date;
 
-public class CourseSessionTest extends TestCase {
-    private CourseSession session;
-    private Date startDate;
-    private static final int CREDITS = 3;
-
-    public void setUp() {
-        startDate = DateUtil.createDate(2003,1,6);
-        session = createCourseSession();
-    }
-
-    public void testCreate() {
-        assertEquals("ENGL", session.getDepartment());
-        assertEquals("101", session.getNumber());
-        assertEquals(0, session.getNumberOfStudents());
-        assertEquals(startDate, session.getStartDate());
-    }
-
-    public void testEnrollStudents() {
-        Student student1 = new Student("Cain DiVoe");
-        session.enroll(student1);
-        assertEquals(CREDITS, student1.getCredits());
-        assertEquals(1, session.getNumberOfStudents());
-        assertEquals(student1, session.get(0));
-
-        Student student2 = new Student("Coralee DeVaughn");
-        session.enroll(student2);
-        assertEquals(CREDITS, student2.getCredits());
-        assertEquals(2, session.getNumberOfStudents());
-        assertEquals(student1, session.get(0));
-        assertEquals(student2, session.get(1));
-    }
-
+public class CourseSessionTest extends SessionTest {
     public void testCourseDates() {
+        Date startDate = DateUtil.createDate(2003, 1, 6);
+        Session session = createSession("ENGL", "200", startDate);
         Date sixteenWeeksOut = DateUtil.createDate(2003,4,25);
         assertEquals(sixteenWeeksOut, session.getEndDate());
     }
 
     public void testCount() {
         CourseSession.resetCount();
-        createCourseSession();
+        createSession("","",new Date());
         assertEquals(1, CourseSession.getCount());
-        createCourseSession();
+        createSession("", "", new Date());
         assertEquals(2, CourseSession.getCount());
     }
 
-    private CourseSession createCourseSession() {
-        CourseSession session =
-                CourseSession.create("ENGL", "101", startDate);
-        session.setNumberOfCredits(CourseSessionTest.CREDITS);
-        return session;
+    @Override
+    protected Session createSession(String department, String number, Date startDate) {
+        return CourseSession.create(department, number, startDate);
     }
+
 }

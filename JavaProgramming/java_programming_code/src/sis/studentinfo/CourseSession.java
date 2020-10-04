@@ -5,75 +5,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CourseSession implements Comparable<CourseSession>{
-
-    private String department;
-    private String number;
-    private ArrayList<Student> students = new ArrayList<Student>();
-    private Date startDate;
+public class CourseSession extends Session{
     private static int count;
-    private int numberOfCredits;
 
-    private CourseSession(String department, String number, Date startDate) {
-        this.department = department;
-        this.number = number;
-        this.startDate = startDate;
+    protected CourseSession(
+            String department, String number, Date startDate) {
+        super(department, number, startDate);
+        CourseSession.incrementCount();
     }
 
-    public static CourseSession create(String department, String number, Date startDate) {
-        incrementCount();
+    public static CourseSession create(
+            String department,
+            String number,
+            Date startDate) {
         return new CourseSession(department, number, startDate);
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    int getNumberOfStudents() {
-        return students.size();
-    }
-
-    @Override
-    public int compareTo(CourseSession that) {
-        int compare = this.getDepartment().compareTo(that.getDepartment());
-
-        if (compare == 0) {
-            compare = this.getNumber().compareTo(that.getNumber());
-        }
-        return compare;
-    }
-
-    public void enroll(Student student) {
-        student.addCredits(numberOfCredits);
-        students.add(student);
-    }
-
-    void setNumberOfCredits(int numberOfCredits) {
-        this.numberOfCredits = numberOfCredits;
-    }
-
-    public ArrayList<Student> getAllStudents() {
-        return students;
-    }
-
-    public Student get(int index) {
-        return students.get(index);
-    }
-
-    public Date getEndDate() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(startDate);
-        int numberOfDays = 16 * 7 - 3;
-        calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-        return calendar.getTime();
-    }
-
-    public Date getStartDate() {
-        return startDate;
     }
 
     static int getCount() {
@@ -84,7 +29,11 @@ public class CourseSession implements Comparable<CourseSession>{
         count = 0;
     }
 
-    static void incrementCount() {
-        count += 1;
+    static private void incrementCount() {
+        ++count;
+    }
+
+    protected int getSessionLength() {
+        return 16;
     }
 }
