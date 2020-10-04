@@ -9,6 +9,8 @@ public class AllTests {
         suite.addTestSuite(StudentTest.class);
         suite.addTestSuite(CourseSessionTest.class);
         suite.addTestSuite(DateUtilTest.class);
+        suite.addTestSuite(BasicGradingStrategyTest.class);
+        suite.addTestSuite(HonorGradingStrategyTest.class);
         return suite;
     }
 }

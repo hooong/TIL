@@ -12,7 +12,7 @@ public class Student {
     private String state = "";
     private int credits;
     private ArrayList<Grade> grades = new ArrayList<>();
-    private GradingStrategy gradingStrategy = new RegularGradingStratey();
+    private GradingStrategy gradingStrategy = new BasicGradingStrategy();
 
     public Student(String name){
         this.name = name;
