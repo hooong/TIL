@@ -2,7 +2,9 @@ package sis.studentinfo;
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 abstract public class SessionTest extends TestCase {
     private Session session;
@@ -59,4 +61,22 @@ abstract public class SessionTest extends TestCase {
         Session session = createSession("", "", new Date());
         assertTrue(session.getSessionLength() > 0);
     }
+
+    public void testIterate() {
+        enrollStudents(session);
+
+        List<Student> results = new ArrayList<>();
+        for (Student student: session) {
+            results.add(student);
+        }
+
+        assertEquals(session.getAllStudents(), results);
+    }
+
+    private void enrollStudents(Session session) {
+        session.enroll(new Student("1"));
+        session.enroll(new Student("2"));
+        session.enroll(new Student("3"));
+    }
+
 }

@@ -2,7 +2,7 @@ package sis.studentinfo;
 
 import java.util.*;
 
-abstract public class Session implements Comparable<Session> {
+abstract public class Session implements Comparable<Session>, Iterable<Student> {
     private String department;
     private String number;
     private List<Student> students = new ArrayList<Student>();
@@ -70,4 +70,8 @@ abstract public class Session implements Comparable<Session> {
     }
 
     abstract protected int getSessionLength();
+
+    public Iterator<Student> iterator() {
+        return students.iterator();
+    }
 }

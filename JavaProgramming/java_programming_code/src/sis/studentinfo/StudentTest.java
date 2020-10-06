@@ -6,13 +6,26 @@ public class StudentTest extends TestCase {
     private static final double GRADE_TOLERANCE = 0.05;
 
     public void testCreate() {
-        final String firstStudentName = "Hooong";
+        final String firstStudentName = "Jane Doe";
         Student student = new Student(firstStudentName);
         assertEquals(firstStudentName, student.getName());
+        assertEquals("Jane", student.getFirstName());
+        assertEquals("Doe", student.getLastName());
+        assertEquals("", student.getMiddleName());
 
-        final String secondStudentName = "Steve";
+        final String secondStudentName = "Blow";
         Student secondStudent = new Student(secondStudentName);
         assertEquals(secondStudentName, secondStudent.getName());
+        assertEquals("", secondStudent.getFirstName());
+        assertEquals("Blow", secondStudent.getLastName());
+        assertEquals("", secondStudent.getMiddleName());
+
+        final String thirdStudentName = "Raymond Douglas Davies";
+        Student thirdStudent = new Student(thirdStudentName);
+        assertEquals(thirdStudentName, thirdStudent.getName());
+        assertEquals("Raymond", thirdStudent.getFirstName());
+        assertEquals("Davies", thirdStudent.getLastName());
+        assertEquals("Douglas", thirdStudent.getMiddleName());
     }
 
     public void testStudentStatus() {
