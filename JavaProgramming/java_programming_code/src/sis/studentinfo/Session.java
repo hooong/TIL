@@ -1,5 +1,7 @@
 package sis.studentinfo;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 abstract public class Session implements Comparable<Session>, Iterable<Student> {
@@ -9,6 +11,7 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
     private Date startDate;
     private static int count;
     private int numberOfCredits;
+    private URL url;
 
     protected Session(String department, String number, Date startDate) {
         this.department = department;
@@ -27,6 +30,24 @@ abstract public class Session implements Comparable<Session>, Iterable<Student> 
     int getNumberOfStudents() {
         return students.size();
     }
+
+    public URL getUrl() {
+        return url;
+    }
+
+    public void setUrl(String urlString) throws SessionException {
+        try {
+            this.url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            log(e);
+            throw new SessionException(e);
+        }
+    }
+
+    private void log(Exception e) {
+        e.printStackTrace();
+    }
+
 
     @Override
     public int compareTo(Session that) {

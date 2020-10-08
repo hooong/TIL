@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 public class Student {
     public enum Grade {
@@ -13,8 +14,8 @@ public class Student {
         D(1),
         F(0);
 
-        private int points;
 
+        private int points;
         Grade(int points) {
             this.points = points;
         }
@@ -23,8 +24,12 @@ public class Student {
             return points;
         }
 
+
     }
     static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
+    public static final int MAX_NAME_PARTS = 3;
+    static final String TOO_MANY_NAME_PARTS_MSG =
+            "Student name '%s' contains more than %d parts";
 
     static final String IN_STATE = "CO";
     private String name;
@@ -42,7 +47,18 @@ public class Student {
         this.name = fullName;
         credits = 0;
         List<String> nameParts = split(fullName);
+        if (nameParts.size() > Student.MAX_NAME_PARTS){
+            String message = String.format(
+                    Student.TOO_MANY_NAME_PARTS_MSG, fullName, Student.MAX_NAME_PARTS);
+            log(message);
+            throw new StudentNameFormatException(message);
+        }
         setName(nameParts);
+    }
+
+    private void log(String message) {
+        Logger logger = Logger.getLogger(getClass().getName());
+        logger.info(message);
     }
 
     private List<String> split(String string) {

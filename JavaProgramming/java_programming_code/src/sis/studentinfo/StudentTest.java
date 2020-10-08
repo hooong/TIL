@@ -28,6 +28,23 @@ public class StudentTest extends TestCase {
         assertEquals("Douglas", thirdStudent.getMiddleName());
     }
 
+    public void testBadlyFormattedName() {
+        String studentName = "a b c d";
+        try {
+            new Student(studentName);
+            fail("expected exception from 4-part name");
+        } catch (StudentNameFormatException expectedException) {
+            String message = String.format(Student.TOO_MANY_NAME_PARTS_MSG,
+                    studentName, Student.MAX_NAME_PARTS);
+            assertEquals(message, expectedException.getMessage());
+            assertTrue(wasLogged(message));
+        }
+    }
+
+    private boolean wasLogged(String message) {
+        return false;
+    }
+
     public void testStudentStatus() {
         Student student = new Student("a");
         assertEquals(0, student.getCredits());
