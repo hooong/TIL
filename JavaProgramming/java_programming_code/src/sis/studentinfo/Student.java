@@ -30,6 +30,7 @@ public class Student {
     public static final int MAX_NAME_PARTS = 3;
     static final String TOO_MANY_NAME_PARTS_MSG =
             "Student name '%s' contains more than %d parts";
+    final static Logger logger = Logger.getLogger(Student.class.getName());
 
     static final String IN_STATE = "CO";
     private String name;
@@ -50,15 +51,10 @@ public class Student {
         if (nameParts.size() > Student.MAX_NAME_PARTS){
             String message = String.format(
                     Student.TOO_MANY_NAME_PARTS_MSG, fullName, Student.MAX_NAME_PARTS);
-            log(message);
+            Student.logger.info(message);
             throw new StudentNameFormatException(message);
         }
         setName(nameParts);
-    }
-
-    private void log(String message) {
-        Logger logger = Logger.getLogger(getClass().getName());
-        logger.info(message);
     }
 
     private List<String> split(String string) {

@@ -2,6 +2,9 @@ package sis.studentinfo;
 
 import junit.framework.TestCase;
 
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+
 public class StudentTest extends TestCase {
     private static final double GRADE_TOLERANCE = 0.05;
 
@@ -29,6 +32,9 @@ public class StudentTest extends TestCase {
     }
 
     public void testBadlyFormattedName() {
+        Handler handler = new TestHandler();
+        Student.logger.addHandler(handler);
+
         String studentName = "a b c d";
         try {
             new Student(studentName);
@@ -37,12 +43,8 @@ public class StudentTest extends TestCase {
             String message = String.format(Student.TOO_MANY_NAME_PARTS_MSG,
                     studentName, Student.MAX_NAME_PARTS);
             assertEquals(message, expectedException.getMessage());
-            assertTrue(wasLogged(message));
+            assertTrue(message, ((TestHandler)handler).getMessage());
         }
-    }
-
-    private boolean wasLogged(String message) {
-        return false;
     }
 
     public void testStudentStatus() {
