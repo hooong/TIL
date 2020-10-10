@@ -147,6 +147,7 @@ public class Student {
     }
 
     double getGpa() {
+        Student.logger.fine("begin getGpa " + System.currentTimeMillis());
         if (grades.isEmpty())
             return 0.0;
 
@@ -154,6 +155,8 @@ public class Student {
         for (Grade grade: grades) {
             total += gradingStrategy.getGradePointsFor(grade);
         }
-        return total / grades.size();
+        double result = total / grades.size();
+        Student.logger.fine("end getGpa " + System.currentTimeMillis());
+        return result;
     }
 }

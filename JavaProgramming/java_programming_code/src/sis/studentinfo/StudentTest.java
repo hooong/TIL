@@ -43,7 +43,7 @@ public class StudentTest extends TestCase {
             String message = String.format(Student.TOO_MANY_NAME_PARTS_MSG,
                     studentName, Student.MAX_NAME_PARTS);
             assertEquals(message, expectedException.getMessage());
-            assertTrue(message, ((TestHandler)handler).getMessage());
+            assertEquals(message, ((TestHandler)handler).getMessage());
         }
     }
 
