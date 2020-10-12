@@ -1,14 +1,13 @@
 package sis.report;
 
 import junit.framework.TestCase;
-import sis.studentinfo.CourseSession;
-import sis.studentinfo.DateUtil;
-import sis.studentinfo.Student;
+import sis.studentinfo.*;
 
 public class RosterReporterTest extends TestCase {
     public void testRosterReport(){
-        CourseSession session =
-                CourseSession.create("ENGL", "101",
+        Session session =
+                CourseSession.create(
+                        new Course("ENGL", "101"),
                         DateUtil.createDate(2003, 1, 6));
 
         session.enroll(new Student("A"));
