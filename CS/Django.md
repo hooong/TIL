@@ -8,6 +8,6 @@
 #### WSGI (Web Server Gateway Interface)
 - Web Server가 Django에게 말을 걸 수 있는 수단으로 생각할 수 있다.
 - 웹 서버가 Python 프로그램으로 python을 쓰기 힘들다는 점에서 등장
-- 웹 서버와 python application간의 통신 방식에 존재하는 종속성을 없애기 위해 표준으로 정의한 것 
+- 웹 서버와 python application간의 통신 방식에 존재하는 종속성을 없애기 위해 표준으로 정의한 것
 - 대표적인 WSGI 서버 uwsgi, gunicorn이 있음.
 #CS

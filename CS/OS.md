@@ -48,6 +48,7 @@
 - 멀티 스레드의 경우 오류로 인해 하나의 스레드가 종료되면 전체 스레드가 종료되고 동기화 문제를 안고있지만 멀티 프로세스의 경우 하나의 프로세스가 죽어도 다른 프로세스에 영향을 끼치지 않는 장점이 있다.
 - 멀티 스레드와 멀티 프로세스는 trade-off 관계로 볼 수 있음.
 
+- - - -
 ### 프로세스 스케줄러
 프로세스를 스케줄링하기 위한 Queue
 - Job Queue : 현재 시스템 내에 있는 모든 프로세스의 집합
@@ -70,6 +71,7 @@ Queue에 프로세스를 넣고 빼는 스케줄러
 	- ready -> suspended
 		- suspended 상태는 외부적인 이유로 프로세스의 수행이 정지된 상태로 메모리에서 내려간 상태. 즉, 프로세스 전부 디스크로 swap out. 이 상태에서는 ready state로 스스로 돌아갈 수 없음.
 
+- - - -
 ### CPU 스케줄러
 Ready Queue의 프로세스들을 스케줄링
 
@@ -128,12 +130,14 @@ Ready Queue의 프로세스들을 스케줄링
 - starvation -> aging 방식으로 낮은 우선순위 queue에서 오래 기다린 job을 높은 우선순위 큐에 넣는다.
 - 구현이 복잡
 
+- - - -
 ### 동기 VS 비동기
 ##### 동기 (Sync)
 - 실행되었을 때 값이 반환되기 전까지 blocking이 되어있다는 의미
 ##### 비동기 (Async)
 - blocking되지 않고 이벤트 queue나 백그라운드 스레드에게 위임을 하고 바로 다음 코드를 실행한다는 의미
 
+- - - -
 ### Synchronization
 
 #### Critical Section
@@ -171,6 +175,99 @@ Ready Queue의 프로세스들을 스케줄링
 	
 - 모니터
 	- 고급언어가 제공하는 abstract 데이터 타입이다.
+- - - -
+## 메모리 관리
+PA(Physical address) : 실제 물리 메모리의 주소값
+LA(Logical address or VA, Virtual address) : CPU에서 생성되는 논리적인 메모리의 주소값
+MMU(Memory Management Unit) : VA -> PA로 바꿔주는 유닛
+각각의 프로세스는 독립된 메모리 공간을 갖고, 운영체제 혹은 다른 프로세스의 메모리 공간에 접근할 수 없는 제한에 걸림. (단, 운영체제는 운영체제 메모리 영역과, 사용자 메모리 영역에 접근 제약 X)
+
+#### Swapping
+CPU 할당 시간이 끝난 프로세스의 메모리를 Disk로 내보내고 다른 프로세스의 메모리를 불러들이는 방법
+장점
+- disk를 크게 가지고 있는 것과 같은 환상을 갖게함
+단점
+- context switch time이 발생함. -> 실제 사용하는 만큼만 swap해서 메모리를 절약하는 방법이 있긴함.
+- swap-in : disk -> ram
+- swap-out : ram -> disk
+
+#### Fragmentation
+1. 프로세스의 메모리를 연속적으로 연결되도록 메모리에 올림 -> External fragmentation(외부 단편화) 발생
+	- External fragmentation : 연속적이지 않은 빈 공간을 합치면 하나의 프로세스를 swap-in 할 수 있는 상황
+2. Fixed-Sized Partition : 메모리를 일정한 크기의 block로 나누고 프로세스의 메모리를 올림 -> internal fragmentation(내부 단편화) 발생
+	- Internal fragmentation : 하나의 Block에서 공간이 남는 문제
+
+해결법
+Compact : 효율적이지 않음.
+
+#### Segmentation
+프로그램을 연속적이지 않게 부분별(stack, code, heap…)로 나누어 메모리에 적재 (seg# + limit)
+장점
+- 중복으로 사용되는 Segment를 공유할 수 있다.
+- 전체 프로세스를 올리는 것보다 segment를 올리는게 더 쉽다.
+- 사용하지 않는 segment를 안올려도 된다.
+- paging에 비해 테이블이 작다.
+단점
+- external, internal fragmentation이 있다.
+
+#### Paging
+- 물리 메모리를 page라는 고정된 frame으로 나누고 논리 메모리에서는 page로 사용. 둘을 잇는 page table이 존재. -> 하나의 프로세스가 사용하는 메모리 공간이 연속적이지 않아도 된다.
+- page table에서 page number로 frame number를 찾는다.
+
+장점
+- external fragmentation을 해결
+단점
+- interanl fragmentation은 여전함.
+- page table(page size가 작으면)이 크면 이 자체가 오버헤드가 될 수 있음
+- page table도 물리 메모리에 존재하므로 메모리에 2번 접근해야한다는 문제 -> TLB(Translation Lookaside buffer)로 해결 가능
+
+#### TLB
+
+## 가상메모리
+가상메모리는 프로세스 전체가 메모리 내에 올라오지 않더라도 실행이 가능하도록 하는 기법. -> 프로그램의 일부분만 메모리에 올린다. -> 더 많은 프로그램을 동시에 실행할 수 있음 -> 응답시간 유지, CPU throughput과 utilization이 증가
+
+## Demand Paging
+초기에 필요한 것들만 물리 메모리 적재하고 필요한 페이지들을 메모리로 읽어오는 방법.
+- 물리 메모리가 모두 사용중이라면 페이지 교체가 이루어져야한다.
+```
+일반적인 메모리 교체 흐름
+1. 디스크에서 필요한 페이지의 위치를 찾음
+2. 빈 페이지 프레임을 찾음
+	- 페이지 교체 알고리즘을 통해 희생 페이지를 고름
+	- 희생 페이지를 디스크에 기록하고 페이지 테이블을 수정
+3. 새롭게 비워진 페이지 테이블에 새 페이지를 읽어오고 프레임 테이블 수정
+4. 사용자 프로세스 재시작
+```
+
+## 페이지 교체 알고리즘
+#### FIFO
+먼저 들어온 페이지부터 희생되는 알고리즘
+장점
+- 이해하기 쉽고, 구현이 쉽다.
+단점
+- 처음부터 많이 사용되던 페이지가 없어질 확률이 큼
+- Belady의 모순 : n+1번째는 n을 포함 -> 그러나 FIFO는 프레임이 늘나도 fault가 늘어나는 경우가 존재
+
+#### Optimal
+앞으로 가장 오랫동안 사용되지 않을 페이지를 찾아 교체
+장점
+- 가장 좋은 부재율을 보장
+단점
+- 모든 프로세스의 메모리 참조 계획을 알수없기 때문에 현식적으로 불가능
+
+#### LRU (Least-Recently-Used)
+가장 오랫동안 사용되지 않은 페이지를 교체
+- 최적의 알고리즘으로 알려져있다.
+- 그래도 오랫동안 사용되지 않다가 갑자기 많이 쓰일때에는 부재가 발생할 수 있다.
+
+#### LFU (Least Frequently Used)
+참조 횟수가 가장 적은 페이지를 교체
+- 활발하게 사용되는 페이지는 참조 횟수가 많을거라는 가정으로 탄생
+- 처음에 많이 사용하다가 뒤에서는 아예 사용하지 않을수도 있음.
+
+#### MFU (Most Frequently Used)
+참조 횟수가 가장 작은 페이지가 최근에 메모리에 올라왔다면, 앞으로 계속 사용할 것이라는 가정에 기반 
+
 
 
 #CS
