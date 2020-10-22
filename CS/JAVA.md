@@ -57,10 +57,111 @@ java 프로그램의 특징
 ## Wrapper Class
 - primitive Type을 Object를 상속하는 참조형으로 나타낸 것.
 
+----
+
+## private 생성자
+
+생성자를 private로 선언하게 되면 인스턴스 생성이 불가능하고, 더 나아가 서브클래스를 만들 수 없다.
+
+- 사용하는 이유
+  - 굳이 인스턴스를 생성할 필요없이 static으로 선언된 메소드를 사용할 수 있게한다.
+  - 예로는 Arrays, Math가 있다.
+
+----
+
+## finally에서의 반환
+
+try블롱안에 return 문을 넣어도 실행되는가? -> Yes
+
+- finally가 실행되지 않는 경우
+  - try/catch 블록 수행 중 가상 머신이 종료
+  - try/catch를 수행하던 스레드가 죽음
+
+----
+
+## final, finally, finalize()
+
+### final
+
+변수나 메서드 또는 클래스가 '변경 불가능'하도록 만듬
+
+- primitive 변수에 적용 시 : 해당 변수 값은 변경 불가능
+- reference 변수에 적용 시 : 참조 변수가 힙 내의 다른 객체를 가리키도록 변경 불가능
+- 메소드에 적용 시 : 오버라이드 불가능
+- 클래스에 적용 시 : 하위 클래스 작성 불가능 (상속 불가능)
+
+### finally
+
+try/catch 블록이 종료될 때 항상 실행될 코드 블록 정의
+
+### finalize()
+
+Garbage Collector가 더 이상 참조가 존재하지 않는 객체를 메모리에서 삭제하겠다고 결정하는 순간 호출되는 메소드.
+
+----
+
+## Reflection
+
+자바 클래스와 객체에 대한 정보를 프로그램 내에서 동적으로 알아낼 수 있도록 하는 기능
+
+- 런타임 동안에 클래스 내부의 메소드와 필드에 대한 정보를 얻을 수 있다.
+- 클래스의 객체를 생성할 수 있다.
+- 객체 필드의 접근 제어자(access modifier)에 관계없이, 그 필드에 대한 참조를 얻어내어 값을 가져오거나(getting) 설정(setting)할 수 있음.
+
+```java
+// 인자 (parameters)
+Object[] doubleArgs = new Object[] { 4.2, 3.9 };
+
+// 클래스 가져오기
+Class rectangleDefinition = Class.forName("MyProj.Rectangle");
+
+// Rectangle rectangle = new Rectangle(4.2, 3.9);와 같은 코드
+Class[] doubleArgsClass = new Class[] {double.class, double.class};
+Constructor doubleArgsConstructor = 
+  rectangleDefinition.getConstructor(doubleArgsClass);
+Rectangle rectangle = (Rectangle) doubleArgsConstructor.newInstance(doubleArgs);
+
+// Double area = rectangle.area();와 같은 코드
+Method m = rectangleDefinition.getDeclaredMethod("area");
+double area = (Double) m.invoke(rectangle);
+```
+
+```java
+Rectangle rectangle = new Rectangle(4.2, 3.9);
+Double area = rectangle.area();
+```
+
+> 위 두 코드는 정확히 같은 일을 하는 코드이다.
+
+유용하게 쓰이는 용도
+
+- 프로그램이 어떻게 동작하는지 실행 시간에 관측하고 조정할 수 있도록 해줌.
+- 메서드나 생성자, 필드에 직접 접근할 수 있어 프로그램을 디버깅하거나 테스트할 때 유용
+- 호출할 메서드를 미리 알고 있지 않더라도 그 이름을 사용해서 호출할 수 있음
+  - Ex) 클래스 이름, 생성자에 전달할 인자, 메서드 이름을 주면 그 정보를 사용해 객체를 생성하고 메서드를 호출할 수 있음,
+
+----
+
+## 스레드
+
+### Runnable 인터페이스 구현
+
+- Runnable을 implements하고 run()을 오버라이딩한다.
+- Runnable 객체를 인자로 주어 Thread 객체를 만들고 start()로 스레드를 시작한다.
+
+### Thread 클래스 상송
+
+- Thread의 run() 메소드를 오버라이딩하여 클래스를 만든다.
+
+### Runnable vs Thread
+
+- 자바는 다중 상속을 지원하지 않음 -> Thread를 상속하게 되면 하위 클래스는 다른 클래스를 상속할 수 없게 된다. 하지만 Runnable을 구현한다면 다른 클래스를 상속받을 수 있다.
+- Thread 클래스의 모든 것을 상속받는 것이 부담이 될 경우가 있다. -> Runnable을 구현하는 편이 나을 수 있다.
+
+이렇게 스레드를 생성할 때 Thread를 상속받는 것보다 Runnable 인터페이스를 구현하는 것이 더 선호된다.
 
 static 메소드
 OOP
-TDD
 설계 (노션 오브젝트 책 정리본)
 
 ## Servlet
