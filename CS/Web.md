@@ -182,10 +182,32 @@ JWT는 `Header.Payload.Signature`의 구조로 이루어져 있으며, 각 부�
 
 - 서버측에서 Allow-Control-Allow-Origin을 설정해주면 다른 도메인에서도 접근 가능하게 할 수 있다.
 
+----
+
+## Nginx vs Apache
+
+### Apache
+
+요청 하나 당 하나의 프로세스 또는 스레드가 처리하는 구조이다.
+
+- 요청이 많아지면 CPU와 memory의 사용이 증가하여 성능 저하가 있을 수 있다.
+- 아파치 서버 프로세스가 blocking 상태이면 아무 요청을 처리할 수 없고, 처리가 완료될때까지 대기하는 일이 발생
+- MPM (Multi Process Module) prefork 방식과 MPM worker 방식이 존자
+  - prefork : 각각의 프로세스 할당
+  - worker : 프로세스와 스레드를 병행하여 사용
+
+### Nginx
+
+보안과 속도를 최적화시키려는 노력에서 탄생한 웹서버로, 사용이 쉽고 규모가 작으며 정적 데이터 처리가 많은 서비스에 적합하다.
+
+- 프로그램의 흐름이 이벤트에 의해 결정이 되는 Event Driven 방식
+  - 기본적으로 싱글 프로세스 기반으로 이벤트를 받는 reactor와 이벤트를 실제 처리하는 worker로 전달하기 위한 handler등으로 구성
+- 적은 수의 스레드로 효율적인 일을 처리 -> context switching 비용이 적고 CPU 소모도 적다.
+- 길고 많은 I/O처리가 필요한 작업의 경우 시스템 큐에 요청이 쌓여 성능이 저하될 가능성이 있음
+
 
 
 요청이 많아지면 뭐부터 살펴봐야하는지?
-CORS
 Nginx
 Token 살아있는 시간?
 SDP
