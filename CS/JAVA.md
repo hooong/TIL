@@ -149,7 +149,7 @@ Double area = rectangle.area();
 - Runnable을 implements하고 run()을 오버라이딩한다.
 - Runnable 객체를 인자로 주어 Thread 객체를 만들고 start()로 스레드를 시작한다.
 
-### Thread 클래스 상송
+### Thread 클래스 상속
 
 - Thread의 run() 메소드를 오버라이딩하여 클래스를 만든다.
 
