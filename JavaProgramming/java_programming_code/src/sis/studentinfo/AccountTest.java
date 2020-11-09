@@ -19,4 +19,9 @@ public class AccountTest extends TestCase {
         account.credit(new BigDecimal("2.99"));
         assertEquals(new BigDecimal("4.70"), account.transactionAverage());
     }
+
+    public void testAverageForNoScores() {
+        Performance performance = new Performance();
+        assertEquals(0.0, performance.average());
+    }
 }
