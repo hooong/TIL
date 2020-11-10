@@ -6,7 +6,8 @@ import sis.studentinfo.Session;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static sis.report.RosterReporter.NEWLINE;
+import static sis.report.ReportConstant.NEWLINE;
+
 
 public class CourseReport {
     private ArrayList<Session> sessions = new ArrayList<>();

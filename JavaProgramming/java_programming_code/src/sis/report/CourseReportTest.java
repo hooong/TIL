@@ -7,7 +7,8 @@ import sis.studentinfo.Session;
 
 import java.util.Date;
 
-import static sis.report.RosterReporter.NEWLINE;
+import static sis.report.ReportConstant.NEWLINE;
+
 
 public class CourseReportTest extends TestCase {
     public void testReport() {
