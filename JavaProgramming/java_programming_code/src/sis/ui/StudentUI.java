@@ -2,9 +2,7 @@ package sis.ui;
 
 import sis.studentinfo.Student;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +16,9 @@ public class StudentUI {
     private BufferedReader reader;
     private BufferedWriter writer;
     private List<Student> students = new ArrayList<>();
-    public StudentUI(BufferedReader reader, BufferedWriter writer) {
-        this.reader = reader;
-        this.writer = writer;
+    public StudentUI() {
+        this.reader = new BufferedReader(new InputStreamReader(System.in));
+        this.writer = new BufferedWriter(new OutputStreamWriter(System.out));
     }
     
     public void run() throws IOException {
