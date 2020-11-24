@@ -126,4 +126,6 @@ JVM의 전체적인 구조를 그려보면 해당 그림과 같다.
   public static native Thread currentThread();
   ```
 
-  
+
+<br>
+
