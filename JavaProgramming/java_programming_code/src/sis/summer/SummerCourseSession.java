@@ -21,4 +21,5 @@ public class SummerCourseSession extends Session {
     protected int getSessionLength() {
         return 8;
     }
+
 }
