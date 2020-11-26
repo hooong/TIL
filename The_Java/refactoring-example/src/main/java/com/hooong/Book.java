@@ -1,42 +1,22 @@
 package com.hooong;
 
-@MyAnnotation("hong")
 public class Book {
+    public static String A = "A";
 
-    private static String b = "BOOK";
-
-    private static final String c = "BOOK";
-
-    @MyAnnotation
-    private String a = "a";
-
-    public String d = "d";
-
-    protected String e = "e";
+    private String B = "B";
 
     public Book() {
     }
 
-    @MyAnnotation
-    public Book(String a, String d, String e) {
-        this.a = a;
-        this.d = d;
-        this.e = e;
+    public Book(String b) {
+        B = b;
     }
 
-    private void f() {
-        System.out.println("F");
+    private void c() {
+        System.out.println("C");
     }
 
-    @MyAnnotation
-    public void g() {
-        System.out.println("g");
+    public int sum(int l, int r){
+        return l + r;
     }
-
-    public int h() {
-        return 100;
-    }
-
-
-
 }
