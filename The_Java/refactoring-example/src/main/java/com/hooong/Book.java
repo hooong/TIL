@@ -1,11 +1,13 @@
 package com.hooong;
 
+@MyAnnotation("hong")
 public class Book {
 
     private static String b = "BOOK";
 
     private static final String c = "BOOK";
 
+    @MyAnnotation
     private String a = "a";
 
     public String d = "d";
@@ -15,6 +17,7 @@ public class Book {
     public Book() {
     }
 
+    @MyAnnotation
     public Book(String a, String d, String e) {
         this.a = a;
         this.d = d;
@@ -25,6 +28,7 @@ public class Book {
         System.out.println("F");
     }
 
+    @MyAnnotation
     public void g() {
         System.out.println("g");
     }
