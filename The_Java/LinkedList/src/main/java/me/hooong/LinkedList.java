@@ -5,10 +5,12 @@ import java.util.List;
 public class LinkedList {
 
     private ListNode head;
+    private ListNode tail;
     private int numberOfNode;
 
     public LinkedList() {
         this.head = null;
+        this.tail = null;
         this.numberOfNode = 0;
     }
 
@@ -16,20 +18,44 @@ public class LinkedList {
         return head;
     }
 
+    public int getNumberOfNode() {
+        return numberOfNode;
+    }
+
     public ListNode add(ListNode nodeToAdd, int position) {
         if (position < 0) {
             throw new RuntimeException("Index Error");
         }
-        else if (position == 0) {
+        else if (position == 1) {
             return addFirst(nodeToAdd);
-        } else {
+        } else if (position == numberOfNode) {
+            return addLast(nodeToAdd);
+        }
+        else {
             return addMiddle(nodeToAdd, position);
         }
     }
 
     private ListNode addFirst(ListNode nodeToAdd) {
+        if (this.head == null) {
+            this.tail = nodeToAdd;
+        }
         nodeToAdd.setNext(this.head);
         this.head = nodeToAdd;
+        this.numberOfNode++;
+
+        return nodeToAdd;
+    }
+
+    public ListNode addLast(ListNode nodeToAdd) {
+        ListNode lastNode = this.tail;
+
+        if (lastNode == null) {
+            this.head = nodeToAdd;
+        } else {
+            lastNode.setNext(nodeToAdd);
+        }
+        this.tail = nodeToAdd;
         this.numberOfNode++;
 
         return nodeToAdd;
@@ -53,7 +79,7 @@ public class LinkedList {
         if (positionToRemove < 0) {
             throw new RuntimeException("Index Error");
         }
-        else if (positionToRemove == 0) {
+        else if (positionToRemove == 1) {
             return removeFirst();
         } else {
             return removeLast(positionToRemove);
@@ -85,7 +111,7 @@ public class LinkedList {
             throw new RuntimeException("Index Error");
         }
 
-        for (int i = 0; i < position - 1; i++) {
+        for (int i = 0; i < position - 2; i++) {
             preNode = preNode.getNext();
         }
 

@@ -12,15 +12,16 @@ class LinkedListTest {
     void LinkedList() {
         LinkedList list = new LinkedList();
 
-        list.add(new ListNode(4), 0);
-        list.add(new ListNode(7), 0);
-        list.add(new ListNode(1), 0);
-        list.add(new ListNode(3), 0);
+        list.add(new ListNode(4), 1);
+        list.add(new ListNode(7), 1);
+        list.add(new ListNode(1), 1);
+        list.add(new ListNode(3), 1);
+        list.add(new ListNode(11), 3);
         System.out.println(list.toString());
 
         list.remove(3);
         System.out.println(list.toString());
-        list.remove(0);
+        list.remove(1);
         System.out.println(list.toString());
 
         list.add(new ListNode(5), 1);
