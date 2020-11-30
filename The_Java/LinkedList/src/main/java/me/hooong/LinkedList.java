@@ -36,7 +36,7 @@ public class LinkedList {
         }
     }
 
-    private ListNode addFirst(ListNode nodeToAdd) {
+    public ListNode addFirst(ListNode nodeToAdd) {
         if (this.head == null) {
             this.tail = nodeToAdd;
         }
@@ -94,7 +94,7 @@ public class LinkedList {
         return removedNode;
     }
 
-    private ListNode removeLast(int position) {
+    public ListNode removeLast(int position) {
         ListNode preNode = searchNode(position);
         ListNode removedNode = preNode.getNext();
 
@@ -132,6 +132,10 @@ public class LinkedList {
             tmpNode = tmpNode.getNext();
         }
         return false;
+    }
+
+    public boolean isEmpty() {
+        return numberOfNode == 0;
     }
 
     @Override
