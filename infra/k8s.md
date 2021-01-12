@@ -200,6 +200,13 @@
 
  Weave net은 멀티 호스트 오버레이 네트워킹 솔루션으로 Weave Bridge를 만들어 vRouter를 통해 컨테이너 간의 통신을 가능하게 해준다.
 
+- weave net을 사용하기 위한 포트 설정
+
+  ```
+  - TCP 6783
+  - UDP 6783/6784
+  ```
+
 - Weave 적용 방법
 
   ```shell
